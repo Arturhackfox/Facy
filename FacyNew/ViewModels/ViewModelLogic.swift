@@ -8,16 +8,16 @@
 import Foundation
 import SwiftUI
 
-@MainActor class ViewModel: ObservableObject {
+@MainActor class ViewModelLogic: ObservableObject {
     @Published var people = [Person]().sorted()
     
-    let url = FileManager.directory.appendingPathComponent("PeopleFaces")
+    @Published var url = FileManager.directory.appendingPathComponent("PeopleFaces")
     
     @Published var isPHPickershowing = false
     @Published var isAddViewShowing = false
-    @Published var isPhotoPickerShowing = false
+//    @Published var isPhotoPickerShowing = false
 
-    
+
     
     @Published var inputImage: UIImage?
     

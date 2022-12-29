@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddView: View {
     
-    @ObservedObject var vm: ViewModel
+    @EnvironmentObject var vm: ViewModelLogic
     
     @State var name = ""
     @State var age = ""
@@ -17,6 +17,8 @@ struct AddView: View {
     @State  var imageDidLoad = false
     @State var inputImage: UIImage?
     @State var image: Image?
+    
+    @State var isPhotoPickerShowing = false
     
     @Environment(\.dismiss) var dismiss
     
@@ -39,7 +41,7 @@ struct AddView: View {
             }
             .onTapGesture {
                 imageDidLoad = true
-                vm.isPhotoPickerShowing = true
+                isPhotoPickerShowing = true
             }
             Form{
                 Section{
@@ -71,16 +73,18 @@ struct AddView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 Button("Save") {
-                    let new = Person(id: UUID(), name: name, image: inputImage ?? UIImage(systemName: "plus")!)
+                    let new = Person(id: UUID(), name: name, image: inputImage ?? UIImage(systemName: "camera.circle")!)
+                    
                     vm.addPerson(person: new)
                     dismiss()
                 }
             }
-            .sheet(isPresented: $vm.isPhotoPickerShowing) {
+            .sheet(isPresented: $isPhotoPickerShowing) {
                 imagePicker(image: $inputImage)
             }
             .onChange(of: inputImage) { _ in loadImage()}
         }
+
     }
     func loadImage() {
         guard let inputImage = inputImage else { return }
@@ -88,8 +92,9 @@ struct AddView: View {
     }
 
 }
-//struct addView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        addView()
-//    }
-//}
+struct addView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddView()
+            .environmentObject(ViewModelLogic())
+    }
+}
