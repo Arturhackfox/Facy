@@ -10,45 +10,36 @@ import SwiftUI
 struct AddView: View {
     
     @EnvironmentObject var vm: ViewModelLogic
-    
-    @State var name = ""
-    @State var age = ""
-    @State var info = ""
-    @State  var imageDidLoad = false
-    @State var inputImage: UIImage?
-    @State var image: Image?
-    
-    @State var isPhotoPickerShowing = false
-    
+    @StateObject var model = ViewModel()
+
     @Environment(\.dismiss) var dismiss
-    
-    
+
     var body: some View {
         VStack{
             ZStack {
                 RoundedRectangle(cornerRadius: 12)
                     .fill(.gray)
-                    .opacity(imageDidLoad ? 0 : 100)
+                    .opacity(model.imageDidLoad ? 0 : 100)
                     .frame(width: 370, height: 370)
                 Text("TAP TO SELECT IMAGE")
                     .font(.title)
-                    .opacity(imageDidLoad ? 0 : 100)
+                    .opacity(model.imageDidLoad ? 0 : 100)
                     .foregroundColor(.white)
-                image?
+                model.image?
                     .resizable()
                     .scaledToFit()
                 
             }
             .onTapGesture {
-                imageDidLoad = true
-                isPhotoPickerShowing = true
+                model.imageDidLoad = true
+                model.isPhotoPickerShowing = true
             }
             Form{
                 Section{
                     HStack {
                         Text("Name: ")
                         
-                        TextField("Enter person's name", text: $name)
+                        TextField("Enter person's name", text: $model.name)
                             .textInputAutocapitalization(.never)
                     }
                 }
@@ -57,7 +48,7 @@ struct AddView: View {
                     HStack {
                         Text("Age: ")
                         
-                        TextField("Enter person's age", text: $age)
+                        TextField("Enter person's age", text: $model.age)
                     }
                 }
                 
@@ -65,7 +56,7 @@ struct AddView: View {
                     HStack {
                         Text("Short-info: ")
                         
-                        TextField("Enter short information", text: $info)
+                        TextField("Enter short information", text: $model.info)
                     }
                 }
             }
@@ -73,23 +64,23 @@ struct AddView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 Button("Save") {
-                    let new = Person(id: UUID(), name: name, image: inputImage ?? UIImage(systemName: "camera.circle")!)
+                    let new = Person(id: UUID(), name: model.name, image: model.inputImage ?? UIImage(systemName: "camera.circle")!)
                     
                     vm.addPerson(person: new)
                     dismiss()
                 }
             }
-            .sheet(isPresented: $isPhotoPickerShowing) {
-                imagePicker(image: $inputImage)
+            .sheet(isPresented: $model.isPhotoPickerShowing) {
+                imagePicker(image: $model.inputImage)
             }
-            .onChange(of: inputImage) { _ in loadImage()}
+            .onChange(of: model.inputImage) { _ in model.loadImage()}
         }
 
     }
-    func loadImage() {
-        guard let inputImage = inputImage else { return }
-        image = Image(uiImage: inputImage)
-    }
+//    func loadImage() {
+//        guard let inputImage = inputImage else { return }
+//        image = Image(uiImage: inputImage)
+//    }
 
 }
 struct addView_Previews: PreviewProvider {

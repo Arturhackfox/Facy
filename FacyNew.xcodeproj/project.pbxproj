@@ -20,6 +20,7 @@
 		327DA242295D9DA9002373A4 /* addView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327DA241295D9DA9002373A4 /* addView.swift */; };
 		327DA248295E09F7002373A4 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327DA247295E09F7002373A4 /* DetailView.swift */; };
 		327DA24A295E0C7A002373A4 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327DA249295E0C7A002373A4 /* ViewModel.swift */; };
+		327DA24C295E189E002373A4 /* ViewModel-AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327DA24B295E189E002373A4 /* ViewModel-AddView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		327DA241295D9DA9002373A4 /* addView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addView.swift; sourceTree = "<group>"; };
 		327DA247295E09F7002373A4 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		327DA249295E0C7A002373A4 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		327DA24B295E189E002373A4 /* ViewModel-AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel-AddView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				327DA249295E0C7A002373A4 /* ViewModel.swift */,
+				327DA24B295E189E002373A4 /* ViewModel-AddView.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				327DA23A295D956E002373A4 /* Person.swift in Sources */,
 				327DA248295E09F7002373A4 /* DetailView.swift in Sources */,
 				327DA240295D9A2F002373A4 /* imagePicker.swift in Sources */,
+				327DA24C295E189E002373A4 /* ViewModel-AddView.swift in Sources */,
 				327DA210295D9447002373A4 /* ContentView.swift in Sources */,
 				327DA23E295D980E002373A4 /* url.swift in Sources */,
 				327DA20E295D9447002373A4 /* FacyNewApp.swift in Sources */,
