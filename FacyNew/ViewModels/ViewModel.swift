@@ -19,19 +19,9 @@ import SwiftUI
     
     @Published var isPHPickershowing = false
     @Published var isAddViewShowing = false
-//    @Published var isPhotoPickerShowing = false
-
 
     
-    @Published var inputImage: UIImage?
-    
-    
-    @Published var name = ""
-    @Published var age = ""
-    @Published var info = ""
-
-    
-    
+    // MARK: decodes and reads data when instance of ViewModel created EACH START
     init() {
         do{
             let data = try Data(contentsOf: url)
@@ -41,24 +31,13 @@ import SwiftUI
         }
     }
     
-   
-    
-    
-    func loadDataOnAppear() {
-        do {
-            let data = try Data(contentsOf: url)
-            people = try JSONDecoder().decode([Person].self, from: data)
-        } catch {
-            people = []
-        }
-    }
-
-    
+    // MARK: Adds new :Person type to array of people
     func addPerson(person: Person) {
         people.append(person)
         save()
     }
     
+        // MARK: writes and saves encoded data to user's document directory
     func save() {
         do {
             let data = try JSONEncoder().encode(people)
