@@ -14,7 +14,7 @@ struct ContentView: View {
         if vm.isAuthenticated {
             NavigationView {
                 List{
-                    ForEach(vm.people) { person in
+                     ForEach(vm.people) { person in
                         ZStack {
                             NavigationLink {
                                 DetailView(person: person)
