@@ -14,11 +14,13 @@ struct DetailView: View {
             Image(uiImage: person.image ?? UIImage(systemName: "")!)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 300, height: 300)
+                .padding()
             
             Text(person.name)
                 .font(.title)
                 .padding()
+            
+            
             
             Spacer()
 
