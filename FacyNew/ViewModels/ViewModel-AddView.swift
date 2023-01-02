@@ -15,11 +15,11 @@ extension AddView {
         
         @Published var name = ""
         @Published var age = ""
-        @Published var info = ""
+        @Published var country = ""
         @Published var longti = 0.0
         @Published var latit = 0.0
         
-//        @Published  var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 50, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 25, longitudeDelta: 25))
+
         
         @Published  var selectedPlace: Person?
         

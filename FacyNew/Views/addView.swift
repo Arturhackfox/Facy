@@ -58,9 +58,9 @@ struct AddView: View {
                 
                 Section{
                     HStack {
-                        Text("Short-info: ")
+                        Text("Contry ")
                         
-                        TextField("Enter short information", text: $model.info)
+                        TextField("Enter country where you met", text: $model.country)
                     }
                 }
                 Section {
@@ -84,7 +84,7 @@ struct AddView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 Button("Save") {
-                    let new = Person(id: UUID(), name: model.name, image: model.inputImage ?? UIImage(systemName: "camera.circle")!, long: mapRegion.center.longitude, lat: mapRegion.center.latitude)
+                    let new = Person(id: UUID(), name: model.name, image: model.inputImage ?? UIImage(systemName: "camera.circle")!, long: mapRegion.center.longitude, lat: mapRegion.center.latitude, country: model.country)
                     vm.addPerson(person: new)
                     dismiss()
                 }

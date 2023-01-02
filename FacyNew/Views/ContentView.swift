@@ -27,7 +27,16 @@ struct ContentView: View {
                                     .scaledToFill()
                                     .frame(width: 44, height: 44)
                                     .clipShape(Circle())
-                                Text(person.name)
+                                VStack(alignment: .leading, spacing: 0){
+                                    Text(person.name)
+                                    HStack(spacing: 5){
+                                        Image(systemName: "location")
+                                            .resizable()
+                                            .frame(width: 10, height: 10)
+                                        Text(person.country)
+                                            .font(.caption)
+                                    }
+                                }
                                 
                                 Spacer()
                                 
