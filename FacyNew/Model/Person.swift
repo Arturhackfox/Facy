@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 
 struct Person: Identifiable, Codable, Equatable, Comparable {
@@ -14,15 +15,23 @@ struct Person: Identifiable, Codable, Equatable, Comparable {
     let id: UUID
     let name: String
     var image: UIImage?
+    var long: Double
+    var lat: Double
     
-    enum CodingKeys: CodingKey {
-        case id, name, image
+    var coordinates: CLLocationCoordinate2D {
+       return CLLocationCoordinate2D(latitude: lat, longitude: long)
     }
     
-    init(id: UUID, name: String, image: UIImage) {
+    enum CodingKeys: CodingKey {
+        case id, name, image, long, lat
+    }
+    
+    init(id: UUID, name: String, image: UIImage, long: Double, lat: Double) {
         self.id = id
         self.name = name
         self.image = image
+        self.long = long
+        self.lat = lat
     }
     
     init(from decoder: Decoder) throws {
@@ -31,6 +40,9 @@ struct Person: Identifiable, Codable, Equatable, Comparable {
         name = try container.decode(String.self, forKey: .name)
         let data = try container.decode(Data.self, forKey: .image)
         image = UIImage(data: data)
+        lat = try container.decode(Double.self, forKey: .lat)
+        long = try container.decode(Double.self, forKey: .long)
+
     }
     
     func encode(to encoder: Encoder) throws {
@@ -39,6 +51,9 @@ struct Person: Identifiable, Codable, Equatable, Comparable {
         try container.encode(name, forKey: .name)
         let imageData = image?.jpegData(compressionQuality: 0.8)
         try container.encode(imageData, forKey: .image)
+        try container.encode(long, forKey: .long)
+        try container.encode(lat, forKey: .lat)
+
     }
     
    static func <(lhs: Person, rhs: Person) -> Bool{

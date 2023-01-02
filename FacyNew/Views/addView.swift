@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct AddView: View {
+    @State var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 50, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 25, longitudeDelta: 25))
     
     @EnvironmentObject var vm: ViewModelLogic
     @StateObject var model = ViewModel()
 
     @Environment(\.dismiss) var dismiss
+    
+    var locationFetcher = LocationFetcher()
 
     var body: some View {
         VStack{
@@ -59,13 +63,28 @@ struct AddView: View {
                         TextField("Enter short information", text: $model.info)
                     }
                 }
+                Section {
+                    ZStack{
+                        Map(coordinateRegion: $mapRegion, annotationItems: vm.people ) { location in
+                            MapAnnotation(coordinate: location.coordinates) {
+                                VStack{
+                                    Circle()
+                                        .foregroundColor(.red)
+                                }
+                            }
+                        }
+                        Circle()
+                            .foregroundColor(.blue.opacity(0.6))
+                            .frame(width: 10, height: 10)
+                    }
+                }
+                .frame(width: 400, height: 300)
             }
             .navigationTitle("Add")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 Button("Save") {
-                    let new = Person(id: UUID(), name: model.name, image: model.inputImage ?? UIImage(systemName: "camera.circle")!)
-                    
+                    let new = Person(id: UUID(), name: model.name, image: model.inputImage ?? UIImage(systemName: "camera.circle")!, long: mapRegion.center.longitude, lat: mapRegion.center.latitude)
                     vm.addPerson(person: new)
                     dismiss()
                 }
@@ -75,12 +94,9 @@ struct AddView: View {
             }
             .onChange(of: model.inputImage) { _ in model.loadImage()}
         }
+       
 
     }
-//    func loadImage() {
-//        guard let inputImage = inputImage else { return }
-//        image = Image(uiImage: inputImage)
-//    }
 
 }
 struct addView_Previews: PreviewProvider {

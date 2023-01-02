@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var vm = ViewModelLogic()
+    var locationFetcher = LocationFetcher()
     
     var body: some View {
         if vm.isAuthenticated {
@@ -18,6 +19,7 @@ struct ContentView: View {
                         ZStack {
                             NavigationLink {
                                 DetailView(person: person)
+                                    .environmentObject(vm)
                             }label: { } .opacity(0)
                             HStack {
                                 Image(uiImage: person.image ?? UIImage(systemName: "camera.circle")!)
@@ -40,6 +42,9 @@ struct ContentView: View {
                         
                     }
                     .onDelete(perform: deleteRow)
+                }
+                .task {
+                    locationFetcher.start()
                 }
                 .navigationTitle("Facy📁")
                 .toolbar{

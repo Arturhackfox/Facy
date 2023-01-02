@@ -21,6 +21,7 @@
 		327DA248295E09F7002373A4 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327DA247295E09F7002373A4 /* DetailView.swift */; };
 		327DA24A295E0C7A002373A4 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327DA249295E0C7A002373A4 /* ViewModel.swift */; };
 		327DA24C295E189E002373A4 /* ViewModel-AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327DA24B295E189E002373A4 /* ViewModel-AddView.swift */; };
+		327DA2502962FD09002373A4 /* FetchLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327DA24F2962FD09002373A4 /* FetchLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		327DA247295E09F7002373A4 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		327DA249295E0C7A002373A4 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		327DA24B295E189E002373A4 /* ViewModel-AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel-AddView.swift"; sourceTree = "<group>"; };
+		327DA24F2962FD09002373A4 /* FetchLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			children = (
 				327DA20F295D9447002373A4 /* ContentView.swift */,
 				327DA241295D9DA9002373A4 /* addView.swift */,
+				327DA24F2962FD09002373A4 /* FetchLocation.swift */,
 				327DA247295E09F7002373A4 /* DetailView.swift */,
 				327DA23F295D9A2F002373A4 /* imagePicker.swift */,
 			);
@@ -319,6 +322,7 @@
 				327DA20E295D9447002373A4 /* FacyNewApp.swift in Sources */,
 				327DA24A295E0C7A002373A4 /* ViewModel.swift in Sources */,
 				327DA242295D9DA9002373A4 /* addView.swift in Sources */,
+				327DA2502962FD09002373A4 /* FetchLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +485,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need to unlock your data.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to enable map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -511,6 +516,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need to unlock your data.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to enable map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
