@@ -15,56 +15,71 @@ struct DetailView: View {
     
     
     var body: some View {
-        VStack(spacing: 0){
-            ZStack{
-                Image(uiImage: person.image ?? UIImage(systemName: "")!)
-                    .resizable()
-                    .scaledToFit()
-                    .padding()
-          
-            }
-            HStack{
-                Text(person.name)
-                    .font(.title3)
-                    .foregroundColor(.primary)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .padding()
+            VStack(spacing: 0){
+                ZStack{
+                    Image(uiImage: person.image ?? UIImage(systemName: "")!)
+                        .resizable()
+                        .scaledToFit()
+                        .padding()
+                }
+                //MARK: People's info
+                HStack{
+                    Text(person.name)
+                        .font(.title3)
+                        .foregroundColor(.primary)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .padding()
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .overlay{
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(.red)
+                        }
+                    
+                    Text("\(person.age) years old")
+                        .padding()
+                        .font(.title3)
+                        .foregroundColor(.primary)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .overlay{
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(.red)
+                        }
+                    Text("from \(person.country)")
+                        .font(.title3)
+                        .padding()
+                        .foregroundColor(.primary)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .overlay{
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(.red)
+                        }
+                }
                 
-                Text("\(person.age) years old")
-                    .font(.title3)
-                    .foregroundColor(.primary)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                
-                Text("from \(person.country)")
-                    .font(.title3)
-                    .padding()
-                    .foregroundColor(.primary)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                
-                Spacer()
-            }
-            
-            ZStack{
-                Map(coordinateRegion: $mapRegion, annotationItems: vm.people ) { person in
-                    MapAnnotation(coordinate: person.coordinates) {
+                ZStack{
+                    Map(coordinateRegion: $mapRegion, annotationItems: vm.people) { person in
+                        MapAnnotation(coordinate: person.coordinates) {
                             VStack(spacing: 0){
                                 Circle()
                                     .foregroundColor(.red)
                                     .padding(.bottom, 2)
-                                    Text(person.name)
-                                        .fixedSize()
-                                        .foregroundColor(.white)
-                                        .font(.subheadline)
+                                Text(person.name)
+                                    .fixedSize()
+                                    .foregroundColor(.white)
+                                    .font(.subheadline)
                             }
-                    }
+                        }
                 }
-             
+                    .disabled(true)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .padding()
+                .padding(.bottom, 50)
+                
             }
-            Spacer()
-
+            .onAppear(perform: update)
+            .navigationTitle("Details")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .onAppear(perform: update)
-       
+        
         
     }
     

@@ -16,7 +16,7 @@ struct ContentView: View {
             NavigationView {
                 List{
                      ForEach(vm.people) { person in
-                        ZStack {
+                         ZStack {
                             NavigationLink {
                                 DetailView(person: person)
                                     .environmentObject(vm)
