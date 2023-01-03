@@ -19,7 +19,7 @@ struct AddView: View {
     var locationFetcher = LocationFetcher()
 
     var body: some View {
-        VStack{
+        Form{
             ZStack {
                 RoundedRectangle(cornerRadius: 12)
                     .fill(.gray)
@@ -38,7 +38,6 @@ struct AddView: View {
                 model.imageDidLoad = true
                 model.isPhotoPickerShowing = true
             }
-            Form{
                 Section{
                     HStack {
                         Text("Name: ")
@@ -58,12 +57,12 @@ struct AddView: View {
                 
                 Section{
                     HStack {
-                        Text("Contry ")
+                        Text("Contry name")
                         
                         TextField("Enter country where you met", text: $model.country)
                     }
                 }
-                Section {
+                Section("Choose Point on map"){
                     ZStack{
                         Map(coordinateRegion: $mapRegion, annotationItems: vm.people ) { location in
                             MapAnnotation(coordinate: location.coordinates) {
@@ -76,24 +75,24 @@ struct AddView: View {
                         Circle()
                             .foregroundColor(.blue.opacity(0.6))
                             .frame(width: 10, height: 10)
-                    }
                 }
                 .frame(width: 400, height: 300)
             }
-            .navigationTitle("Add")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar{
-                Button("Save") {
-                    let new = Person(id: UUID(), name: model.name, image: model.inputImage ?? UIImage(systemName: "camera.circle")!, long: mapRegion.center.longitude, lat: mapRegion.center.latitude, country: model.country)
-                    vm.addPerson(person: new)
-                    dismiss()
-                }
-            }
-            .sheet(isPresented: $model.isPhotoPickerShowing) {
-                imagePicker(image: $model.inputImage)
-            }
-            .onChange(of: model.inputImage) { _ in model.loadImage()}
+       
         }
+        .navigationTitle("Add")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar{
+            Button("Save") {
+                let new = Person(id: UUID(), name: model.name, image: model.inputImage ?? UIImage(systemName: "camera.circle")!, long: mapRegion.center.longitude, lat: mapRegion.center.latitude, country: model.country)
+                vm.addPerson(person: new)
+                dismiss()
+            }
+        }
+        .sheet(isPresented: $model.isPhotoPickerShowing) {
+            imagePicker(image: $model.inputImage)
+        }
+        .onChange(of: model.inputImage) { _ in model.loadImage()}
        
 
     }
