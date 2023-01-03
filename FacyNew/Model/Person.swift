@@ -16,6 +16,7 @@ struct Person: Identifiable, Codable, Equatable, Comparable {
     let name: String
     var image: UIImage?
     var country: String
+    var age: String
     var long: Double
     var lat: Double
     
@@ -24,16 +25,17 @@ struct Person: Identifiable, Codable, Equatable, Comparable {
     }
     
     enum CodingKeys: CodingKey {
-        case id, name, image, long, lat, country
+        case id, name, image, long, lat, country, age
     }
     
-    init(id: UUID, name: String, image: UIImage, long: Double, lat: Double, country: String) {
+    init(id: UUID, name: String, image: UIImage, long: Double, lat: Double, country: String, age: String) {
         self.id = id
         self.name = name
         self.image = image
         self.country = country
         self.long = long
         self.lat = lat
+        self.age = age
     }
     
     init(from decoder: Decoder) throws {
@@ -45,6 +47,8 @@ struct Person: Identifiable, Codable, Equatable, Comparable {
         lat = try container.decode(Double.self, forKey: .lat)
         long = try container.decode(Double.self, forKey: .long)
         country = try container.decode(String.self, forKey: .country)
+        age = try container.decode(String.self, forKey: .age)
+
     }
     
     func encode(to encoder: Encoder) throws {
@@ -56,6 +60,8 @@ struct Person: Identifiable, Codable, Equatable, Comparable {
         try container.encode(long, forKey: .long)
         try container.encode(lat, forKey: .lat)
         try container.encode(country, forKey: .country)
+        try container.encode(age, forKey: .age)
+
         
     }
     

@@ -15,15 +15,34 @@ struct DetailView: View {
     
     
     var body: some View {
-        VStack{
-            Image(uiImage: person.image ?? UIImage(systemName: "")!)
-                .resizable()
-                .scaledToFit()
-                .padding()
-            
-            Text(person.name)
-                .font(.title)
-                .padding()
+        VStack(spacing: 0){
+            ZStack{
+                Image(uiImage: person.image ?? UIImage(systemName: "")!)
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+          
+            }
+            HStack{
+                Text(person.name)
+                    .font(.title3)
+                    .foregroundColor(.primary)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .padding()
+                
+                Text("\(person.age) years old")
+                    .font(.title3)
+                    .foregroundColor(.primary)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                
+                Text("from \(person.country)")
+                    .font(.title3)
+                    .padding()
+                    .foregroundColor(.primary)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                
+                Spacer()
+            }
             
             ZStack{
                 Map(coordinateRegion: $mapRegion, annotationItems: vm.people ) { person in
@@ -54,3 +73,9 @@ struct DetailView: View {
     }
 }
 
+struct DetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        DetailView(person: Person(id: UUID(), name: "max", image: UIImage(systemName: "person.fill")!, long: 20, lat: 30, country: "Ukraine", age: "21"))
+            .environmentObject(ViewModelLogic())
+    }
+}

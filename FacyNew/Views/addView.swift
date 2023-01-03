@@ -43,7 +43,6 @@ struct AddView: View {
                         Text("Name: ")
                         
                         TextField("Enter person's name", text: $model.name)
-                            .textInputAutocapitalization(.never)
                     }
                 }
                 
@@ -84,7 +83,7 @@ struct AddView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
             Button("Save") {
-                let new = Person(id: UUID(), name: model.name, image: model.inputImage ?? UIImage(systemName: "camera.circle")!, long: mapRegion.center.longitude, lat: mapRegion.center.latitude, country: model.country)
+                let new = Person(id: UUID(), name: model.name, image: model.inputImage ?? UIImage(systemName: "camera.circle")!, long: mapRegion.center.longitude, lat: mapRegion.center.latitude, country: model.country, age: model.age)
                 vm.addPerson(person: new)
                 dismiss()
             }
